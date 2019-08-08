@@ -2,31 +2,22 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 8080;
 const cors = require("cors");
-const nodemailer = require('nodemailer');
+const email_controller = require('./controllers/email_controller')
+const bodyParser = require("body-parser");
 require('dotenv').config()
 
+// const connection = require("./config/config.js");
+// to connect database 
+
 app.use(cors());
-
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user:  process.env.DB_USER,
-    pass:  process.env.DB_PASS
-  }
-});
-
-const mailOptions = {
-  from: process.env.DB_USER,
-  to: process.env.DB_RECIPIENT,
-  subject: 'Sending Email using Node.js',
-  html: '<!DOCTYPE html><body><p>Put your message here...</p></body></html>',
-};
-
-transporter.sendMail(mailOptions, (err, info) => {
-  err ? console.log(err) : console.log('Email sent: ' + info.response + ' to ' + mailOptions.to);
-});
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
+app.use('/email_contact', email_controller)
 
 app.listen(port, err => {
   err ? console.log(err) : console.log(`Server is listening on ${port}`);
-
 });
