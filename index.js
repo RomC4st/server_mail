@@ -8,7 +8,7 @@ require('dotenv').config()
 
 
 // const connection = require("./config/config.js");
-// to connect database 
+//// to connect database 
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -17,7 +17,11 @@ app.use(
     extended: true
   })
 );
+
+//Route
 app.use('/email_contact', email_controller)
+
+//Listener
 app.listen(port, err => {
   err ? console.log(err) : console.log(`Server is listening on ${port}`);
 });
