@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
           from: body.recipient,
           to: process.env._USER,
           subject: `Prise de contact de ${body.name}`,
-          html: `<!DOCTYPE html><body><p>${body.message}</p></body></html>`,
+          html: `<!DOCTYPE html><body><h1>${body.recipient}</h1><p>${body.message}</p></body></html>`,
         };
         transporter.sendMail(mailOptions, (err, info) => {
           err ? res.sendStatus(404) : res.sendStatus(200);
