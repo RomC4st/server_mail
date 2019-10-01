@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
         });
 
         const mailOptions = {
-          from: `${body.email}`,
+          from: body.email,
           to: process.env._USER,
           subject: `Prise de contact de ${body.name}`,
           html: `<!DOCTYPE html><body><p>Email de ${body.name}: ${body.email}</p><p>${body.message}</p></body></html>`,
