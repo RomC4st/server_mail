@@ -19,6 +19,9 @@ app.use(
 );
 
 //Route
+app.get('/', function (req, res) {
+  res.send('pong');
+});
 app.use('/email_contact', email_controller)
 
 //Listener
